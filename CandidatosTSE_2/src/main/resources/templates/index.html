@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil dos Candidatos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Perfil dos Candidatos - Eleições 2026 - MG</h1>
+    <p>Filtre por gênero, escolaridade e faixa etária</p>
+</header>
+
+<main class="layout">
+    <aside class="filtros" aria-label="Filtros dos candidatos">
+        <form method="get" th:action="@{/}">
+            <fieldset>
+                <legend>Gênero</legend>
+                <label class="opcao">
+                    <input type="radio" name="genero" value="" th:checked="${generoSelecionado == ''}">
+                    Todos
+                </label>
+                <label class="opcao" th:each="genero : ${generos}">
+                    <input type="radio" name="genero" th:value="${genero}"
+                           th:checked="${#strings.equalsIgnoreCase(genero, generoSelecionado)}">
+                    <span th:text="${genero}"></span>
+                </label>
+            </fieldset>
+
+            <div class="campo">
+                <label for="escolaridade">Escolaridade</label>
+                <select id="escolaridade" name="escolaridade">
+                    <option value="" th:selected="${escolaridadeSelecionada == ''}">Todas</option>
+                    <option th:each="escolaridade : ${escolaridades}" th:value="${escolaridade}"
+                            th:text="${escolaridade}"
+                            th:selected="${#strings.equalsIgnoreCase(escolaridade, escolaridadeSelecionada)}"></option>
+                </select>
+            </div>
+
+            <fieldset>
+                <legend>Faixa etária</legend>
+                <div class="idades">
+                    <input type="number" name="idadeMin" min="0" placeholder="De" aria-label="Idade mínima" th:value="${idadeMin}">
+                    <span>até</span>
+                    <input type="number" name="idadeMax" min="0" placeholder="Até" aria-label="Idade máxima" th:value="${idadeMax}">
+                </div>
+            </fieldset>
+
+            <div class="botoes">
+                <button type="submit">Filtrar</button>
+                <a th:href="@{/}" class="limpar">Limpar</a>
+            </div>
+        </form>
+    </aside>
+
+    <section class="resultados" aria-label="Candidatos encontrados">
+        <p class="contagem"><strong th:text="${totalEncontrado}"></strong> candidato(s) encontrado(s).</p>
+        <p class="aviso" th:if="${totalEncontrado == 0}">Nenhum candidato encontrado com os filtros selecionados.</p>
+
+        <div class="lista-candidatos">
+            <article class="card-candidato" th:each="cand : ${candidatos}">
+                <img th:src="@{'/images/candidatos/' + ${cand.nomeArquivoFoto}}"
+                     th:alt="${cand.nomeUrna}" class="foto-candidato" loading="lazy">
+                <div class="dados">
+                    <h2><span th:text="${cand.nomeUrna}"></span> <span class="numero" th:text="${cand.nrCandidato}"></span></h2>
+                    <p class="cargo" th:text="${cand.cargo + ' · ' + cand.siglaPartido}"></p>
+                    <div class="etiquetas">
+                        <span class="genero" th:classappend="${cand.genero == 'FEMININO' ? 'etiqueta-f' : (cand.genero == 'MASCULINO' ? 'etiqueta-m' : '')}"
+                              th:text="${cand.genero}"></span>
+                        <span class="idade" th:if="${cand.idade >= 0}" th:text="${cand.idade + ' anos'}"></span>
+                    </div>
+                    <p class="detalhe" th:if="${!#strings.isEmpty(cand.grauInstrucao) and !#strings.startsWith(cand.grauInstrucao, '#')}"
+                       th:text="${cand.grauInstrucao}"></p>
+                    <p class="detalhe" th:if="${!#strings.isEmpty(cand.ocupacao) and !#strings.startsWith(cand.ocupacao, '#')}"
+                       th:text="${cand.ocupacao}"></p>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

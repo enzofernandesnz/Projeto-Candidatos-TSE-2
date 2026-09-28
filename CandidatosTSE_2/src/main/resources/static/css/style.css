@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f1ed;
+    color: #292929;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    padding: 20px 28px;
+    background: #5d2b86;
+    color: white;
+}
+
+h1 {
+    margin: 0 0 5px;
+    font-size: 27px;
+}
+
+header p {
+    margin: 0;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    align-items: start;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 0 20px;
+}
+
+.filtros, .card-candidato {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px #0000001a;
+}
+
+.filtros {
+    padding: 20px;
+}
+
+fieldset {
+    min-width: 0;
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+}
+
+legend, .campo > label {
+    display: block;
+    margin-bottom: 8px;
+    padding: 0;
+    color: #653291;
+    font-weight: bold;
+}
+
+.opcao {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+.opcao input {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+select, input[type="number"] {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font: inherit;
+}
+
+.idades {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.idades span {
+    color: #666;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+}
+
+button, .limpar {
+    flex: 1;
+    padding: 12px 8px;
+    border: 1px solid #5d2b86;
+    border-radius: 4px;
+    font: inherit;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background: #5d2b86;
+    color: white;
+}
+
+button:hover {
+    background: #492168;
+}
+
+.limpar {
+    background: white;
+    color: #5d2b86;
+}
+
+.limpar:hover {
+    background: #f2eaf8;
+}
+
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid #874ab2;
+    outline-offset: 3px;
+}
+
+.contagem {
+    margin: 0 0 14px;
+    color: #444;
+}
+
+.lista-candidatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+}
+
+.card-candidato {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-left: 5px solid #5d2b86;
+}
+
+.foto-candidato {
+    flex-shrink: 0;
+    width: 90px;
+    height: auto;
+    aspect-ratio: 161 / 225;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+}
+
+.dados {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.dados h2 {
+    margin: 0 0 5px;
+    font-size: 17px;
+    line-height: 1.25;
+}
+
+.numero {
+    margin-left: 6px;
+    color: #653291;
+    font-size: 15px;
+}
+
+.cargo {
+    margin: 0 0 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+.etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.etiquetas span {
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.genero {
+    background: #ece8ef;
+    color: #62536b;
+}
+
+.etiqueta-m {
+    background-color: #e1ecf7;
+    color: #1f5c99;
+}
+
+.etiqueta-f {
+    background-color: #f7e1f0;
+    color: #a0226f;
+}
+
+.idade {
+    background: #fff3d6;
+    color: #926000;
+}
+
+.detalhe {
+    margin: 0 0 5px;
+    color: #707070;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.aviso {
+    padding: 18px;
+    background: white;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+    header {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+        margin: 18px auto;
+        padding: 0 14px;
+        gap: 20px;
+    }
+
+}
+
+@media (max-width: 360px) {
+    .lista-candidatos {
+        grid-template-columns: 1fr;
+    }
+}
